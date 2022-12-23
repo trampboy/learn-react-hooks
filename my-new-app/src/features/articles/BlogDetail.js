@@ -2,14 +2,14 @@
  * Created by JingHongGang on 2022/12/22.
  */
 // import CommentList from '../comments/CommentList'
-import plugins from 'js-plugin'
+import Extension from '../../Extension'
 
 export default function blogDetail() {
   return (
     <div>
       Blog Detail
       {/*<CommentList/>*/}
-      {plugins.invoke("blog.footer")}
+      <Extension name={"blog.footer"}/>
     </div>
   )
 }
