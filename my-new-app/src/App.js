@@ -6,6 +6,8 @@ import plugins from 'js-plugin'
 import CommentList from './features/comments/CommentList'
 import {Button} from 'antd'
 import 'antd/dist/reset.css'
+import _ from 'lodash'
+import {useHash} from 'react-use'
 
 // function UserList() {
 //   const [users, setUsers] = React.useState([])
@@ -48,10 +50,55 @@ plugins.register({
   }
 })
 
+function MyRouter({children}) {
+  const props = children.map((child) => {
+    return child.props
+  })
+  const routes = _.keyBy(props, 'path')
+  const [hash] = useHash()
+  const Page = routes[hash.replace('#', '')]?.component
+  return Page ? <Page/> : `Not Found.`
+}
+
+function Route() {
+  return null
+}
+
+function Page1() {
+  return "Page 1"
+}
+
+function Page2() {
+  return "Page 2"
+}
+
+function Page3() {
+  return "Page 3"
+}
+
+function Page4() {
+  return "Page 4"
+}
+
+
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <div className="sider">
+        <a href="#page1">Page 1</a>
+        <a href="#page2">Page 2</a>
+        <a href="#page3">Page 3</a>
+        <a href="#page4">Page 4</a>
+      </div>
+      <div className="page-container">
+        <MyRouter>
+          <Route path="page1" component={Page1}></Route>
+          <Route path="page2" component={Page2}></Route>
+          <Route path="page3" component={Page3}></Route>
+          <Route path="page4" component={Page4}></Route>
+        </MyRouter>
+      </div>
+      {/*<header className="App-header">*/}
         {/*<img src={logo} className="App-logo" alt="logo" />*/}
         {/*<p>*/}
         {/*  Edit <code>src/App.js</code> and save to reload.*/}
@@ -67,7 +114,7 @@ function App() {
         {/*<UserList/>*/}
         {/*<BlogDetail/>*/}
         {/*<Button type="primary">Button</Button>*/}
-      </header>
+      {/*</header>*/}
     </div>
   );
 }
