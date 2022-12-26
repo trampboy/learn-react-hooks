@@ -11,6 +11,7 @@ import {useHash} from 'react-use'
 import MyRouter from './MyRouter'
 import {createBrowserRouter, RouterProvider, Outlet, Link} from 'react-router-dom'
 import UsersLayout from './features/users/UsersLayout'
+import ProfilePage from './features/profile/ProfilePage'
 
 // function UserList() {
 //   const [users, setUsers] = React.useState([])
@@ -78,7 +79,7 @@ function Root() {
     <div className="App">
       <div className="sider">
         <Link to={`users`}>Users</Link>
-        <Link to={`page2`}>Page 2</Link>
+        <Link to={`profilePage`}>ProfilePage</Link>
         <Link to={`page3`}>Page 3</Link>
         <Link to={`page4`}>Page 4</Link>
       </div>
@@ -114,8 +115,8 @@ const router = createBrowserRouter([
       path: 'users',
       element: <UsersLayout/>,
     }, {
-      path: 'page2',
-      element: <Page2/>,
+      path: 'profilePage',
+      element: <ProfilePage/>,
     }, {
       path: 'page3',
       element: <Page3/>,
