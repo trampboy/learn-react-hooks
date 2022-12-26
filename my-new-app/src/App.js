@@ -8,6 +8,7 @@ import {Button} from 'antd'
 import 'antd/dist/reset.css'
 import _ from 'lodash'
 import {useHash} from 'react-use'
+import MyRouter from './MyRouter'
 
 // function UserList() {
 //   const [users, setUsers] = React.useState([])
@@ -49,16 +50,6 @@ plugins.register({
     footer: () => <CommentList/>
   }
 })
-
-function MyRouter({children}) {
-  const props = children.map((child) => {
-    return child.props
-  })
-  const routes = _.keyBy(props, 'path')
-  const [hash] = useHash()
-  const Page = routes[hash.replace('#', '')]?.component
-  return Page ? <Page/> : `Not Found.`
-}
 
 function Route() {
   return null
