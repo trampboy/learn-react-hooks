@@ -9,6 +9,7 @@ import 'antd/dist/reset.css'
 import _ from 'lodash'
 import {useHash} from 'react-use'
 import MyRouter from './MyRouter'
+import {createBrowserRouter, RouterProvider, Outlet, Link} from 'react-router-dom'
 
 // function UserList() {
 //   const [users, setUsers] = React.useState([])
@@ -71,43 +72,61 @@ function Page4() {
   return "Page 4"
 }
 
-
-function App() {
+function Root() {
   return (
     <div className="App">
       <div className="sider">
-        <a href="#page1">Page 1</a>
-        <a href="#page2">Page 2</a>
-        <a href="#page3">Page 3</a>
-        <a href="#page4">Page 4</a>
+        <Link to={`page1`}>Page 1</Link>
+        <Link to={`page2`}>Page 2</Link>
+        <Link to={`page3`}>Page 3</Link>
+        <Link to={`page4`}>Page 4</Link>
       </div>
       <div className="page-container">
-        <MyRouter>
-          <Route path="page1" component={Page1}></Route>
-          <Route path="page2" component={Page2}></Route>
-          <Route path="page3" component={Page3}></Route>
-          <Route path="page4" component={Page4}></Route>
-        </MyRouter>
+        <Outlet/>
       </div>
       {/*<header className="App-header">*/}
-        {/*<img src={logo} className="App-logo" alt="logo" />*/}
-        {/*<p>*/}
-        {/*  Edit <code>src/App.js</code> and save to reload.*/}
-        {/*</p>*/}
-        {/*<a*/}
-        {/*  className="App-link"*/}
-        {/*  href="https://reactjs.org"*/}
-        {/*  target="_blank"*/}
-        {/*  rel="noopener noreferrer"*/}
-        {/*>*/}
-        {/*  Learn React*/}
-        {/*</a>*/}
-        {/*<UserList/>*/}
-        {/*<BlogDetail/>*/}
-        {/*<Button type="primary">Button</Button>*/}
+      {/*<img src={logo} className="App-logo" alt="logo" />*/}
+      {/*<p>*/}
+      {/*  Edit <code>src/App.js</code> and save to reload.*/}
+      {/*</p>*/}
+      {/*<a*/}
+      {/*  className="App-link"*/}
+      {/*  href="https://reactjs.org"*/}
+      {/*  target="_blank"*/}
+      {/*  rel="noopener noreferrer"*/}
+      {/*>*/}
+      {/*  Learn React*/}
+      {/*</a>*/}
+      {/*<UserList/>*/}
+      {/*<BlogDetail/>*/}
+      {/*<Button type="primary">Button</Button>*/}
       {/*</header>*/}
     </div>
   );
+}
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Root/>,
+    children: [{
+      path: 'page1',
+      element: <Page1/>,
+    }, {
+      path: 'page2',
+      element: <Page2/>,
+    }, {
+      path: 'page3',
+      element: <Page3/>,
+    }, {
+      path: 'page4',
+      element: <Page4/>,
+    }]
+  }
+])
+
+function App() {
+  return <RouterProvider router={router}/>
 }
 
 export default App;
