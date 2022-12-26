@@ -45,12 +45,6 @@ plugins.register({
     footer: () => <CommentList/>
   }
 })
-plugins.register({
-  name: 'plugin2',
-  blog: {
-    footer: () => <CommentList/>
-  }
-})
 
 function App() {
   return (
