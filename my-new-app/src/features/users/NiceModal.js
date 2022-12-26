@@ -74,14 +74,26 @@ function hideModal(modalId, force) {
   }
 }
 
+const modalCallbacks = {}
 export function useNiceModal(modalId) {
   const dispatch = useDispatch()
   const show = useCallback((args) => {
-    dispatch(showModal(modalId, args))
+    return new Promise(resolve => {
+      modalCallbacks[modalId] = resolve
+      dispatch(showModal(modalId, args))
+    })
   }, [dispatch, modalId])
+
+  const resolve = useCallback((args) => {
+    if (modalCallbacks[modalId]) {
+      modalCallbacks[modalId](args)
+      delete modalCallbacks[modalId]
+    }
+  }, [modalId])
 
   const hide = useCallback((force) => {
     dispatch(hideModal(modalId, force))
+    delete modalCallbacks[modalId]
   }, [dispatch, modalId])
 
   const args = useSelector((s) => s[modalId])
@@ -93,5 +105,6 @@ export function useNiceModal(modalId) {
     visible: !!args, // 有参数就认为需要显示
     show,
     hide,
+    resolve,
   }
 }
