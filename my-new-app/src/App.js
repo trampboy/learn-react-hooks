@@ -4,6 +4,8 @@ import React from 'react';
 import BlogDetail from './features/articles/BlogDetail'
 import plugins from 'js-plugin'
 import CommentList from './features/comments/CommentList'
+import {Button} from 'antd'
+import 'antd/dist/reset.css'
 
 // function UserList() {
 //   const [users, setUsers] = React.useState([])
@@ -63,7 +65,8 @@ function App() {
         {/*  Learn React*/}
         {/*</a>*/}
         {/*<UserList/>*/}
-        <BlogDetail/>
+        {/*<BlogDetail/>*/}
+        {/*<Button type="primary">Button</Button>*/}
       </header>
     </div>
   );
